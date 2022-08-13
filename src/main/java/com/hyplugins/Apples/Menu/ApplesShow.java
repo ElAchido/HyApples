@@ -50,7 +50,7 @@ public class ApplesShow {
     }
 
     public ItemStack setItemNames(AppleConstructor apple) {
-        ItemStack item = apple.getMadeApple();
+        ItemStack item = apple.getMadeApple().clone();
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(apple.getId());
         meta.setLore(new ArrayList<>(Arrays.asList(
