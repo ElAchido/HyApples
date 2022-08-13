@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hyplugins</groupId>
-    <artifactId>Apples</artifactId>
-    <version>1.0</version>
+    <artifactId>HyApples</artifactId>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <name>HyApples</name>

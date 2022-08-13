@@ -51,7 +51,7 @@ public final class Apples extends JavaPlugin {
     public void logOnStart() {
         ConsoleCommandSender sender = Bukkit.getConsoleSender();
         sender.sendMessage(Colors.colorMessageNormal("&8[ &fHy&6&lAPPLES &8] &fPlugin loaded successfully."));
-        if (isPlaceholderAPI) sender.sendMessage(Colors.colorMessageNormal("&8[ &fHy&6&lAPPLES &8] &fPlaceHolderAPI detected, their plugin placeholders will be available on broadcast messages..."));
+        if (isPlaceholderAPI) sender.sendMessage(Colors.colorMessageNormal("&8[ &fHy&6&lAPPLES &8] &fPlaceHolderAPI detected, their plugin placeholders will be available in broadcast messages..."));
         if (configClass.isProtectionAnvilEnabled) sender.sendMessage(Colors.colorMessageNormal("&8[ &fHy&6&lAPPLES &8] &fAnvil Protection &aenabled&f, players cannot modify apples on anvils."));
         if (configClass.isFireworkDamageAllowed) sender.sendMessage(Colors.colorMessageNormal("&8[ &fHy&6&lAPPLES &8] &fFirework Protection &aenabled&f, players won't receive damage on apple's fireworks."));
         if (XMaterial.isNewVersion()) {

@@ -38,41 +38,41 @@ public class MainCommand implements CommandExecutor, TabCompleter {
                                     try {
                                         appleCase.setAmount(Integer.parseInt(args[2]));
                                     } catch (NumberFormatException e) {
-                                        Colors.sendMessage(config.getString("messages.invalid-number"), sender, config.getString("messages.prefix"));
+                                        Colors.sendMessage(config.getString("messages.invalid-number"), sender, apples.config.getString("messages.prefix"));
                                         return false;
                                     }
                                     target.getInventory().addItem(appleCase);
-                                    Colors.sendMessage(config.getString("messages.give-apple").replace("%player_apples%", target.getName()), sender, config.getString("messages.prefix"));
+                                    Colors.sendMessage(config.getString("messages.give-apple").replace("%player_apples%", target.getName()), sender, apples.config.getString("messages.prefix"));
                                     String message = config.getString("messages.receive-apple").replace("%amount%", String.valueOf(appleCase.getAmount()));
                                     message = message.replace("%prefix%", config.getString("messages.prefix"));
                                     target.sendMessage(Colors.colorMessageNormal(message.replace("%apple%", apple.getName())));
                                 } else {
-                                    Colors.sendMessage(config.getString("messages.player-not-online").replace("%player_apples%", args[3]), sender, config.getString("messages.prefix"));
+                                    Colors.sendMessage(config.getString("messages.player-not-online").replace("%player_apples%", args[3]), sender, apples.config.getString("messages.prefix"));
                                 }
                             } else {
-                                Colors.sendMessage(config.getString("messages.player-not-found").replace("%player_apples%", args[3]), sender, config.getString("messages.prefix"));
+                                Colors.sendMessage(config.getString("messages.player-not-found").replace("%player_apples%", args[3]), sender, apples.config.getString("messages.prefix"));
                             }
                             return false;
                         }
                     }
-                    Colors.sendMessage(config.getString("messages.apple-not-found").replace("%appleID%", args[1]), sender, config.getString("messages.prefix"));
+                    Colors.sendMessage(config.getString("messages.apple-not-found").replace("%appleID%", args[1]), sender, apples.config.getString("messages.prefix"));
                 } else {
-                    Colors.sendMessage(config.getString("messages.invalid-command"), sender, config.getString("messages.prefix"));
+                    Colors.sendMessage(config.getString("messages.invalid-command"), sender, apples.config.getString("messages.prefix"));
                 }
             } else if (args.length == 1) {
                 if (args[0].equals("reload")) {
                     apples.configClass.reloadConfig();
-                    Colors.sendMessage(config.getString("messages.reload-config"), sender, config.getString("messages.prefix"));
+                    Colors.sendMessage(config.getString("messages.reload-config"), sender, apples.config.getString("messages.prefix"));
                 } else if (args[0].equals("gui") && sender instanceof Player) {
                     apples.gui.showApplesGUI(1, ((Player) sender).getPlayer());
                 } else {
-                    Colors.sendMessage(config.getString("messages.invalid-command"), sender, config.getString("messages.prefix"));
+                    Colors.sendMessage(config.getString("messages.invalid-command"), sender, apples.config.getString("messages.prefix"));
                 }
             } else {
-                Colors.sendMessage(config.getString("messages.invalid-command"), sender, config.getString("messages.prefix"));
+                Colors.sendMessage(config.getString("messages.invalid-command"), sender, apples.config.getString("messages.prefix"));
             }
         } else {
-            Colors.sendMessage(config.getString("no-command-perms"), sender, config.getString("messages.prefix"));
+            Colors.sendMessage(config.getString("messages.no-command-perms"), sender, apples.config.getString("messages.prefix"));
         }
         return false;
     }

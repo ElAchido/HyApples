@@ -18,7 +18,7 @@ import java.util.List;
 
 public class Events implements Listener {
 
-    private Apples apples;
+    private final Apples apples;
 
     public Events(Apples apples) {
         this.apples = apples;
@@ -33,7 +33,7 @@ public class Events implements Listener {
                 Player player = e.getPlayer();
                 if (apple.getUsePerm()) {
                     if (!player.hasPermission("hyplugins.apples." + apple.getId()) || !player.isOp()) {
-                        player.sendMessage(Colors.colorMessageNormal(apples.getConfig().getString("messages.no-perms")));
+                        player.sendMessage(Colors.colorMessageNormal(apples.config.getString("messages.no-perms").replace("%prefix%", apples.config.getString("messages.prefix"))));
                         e.setCancelled(true);
                         return;
                     }

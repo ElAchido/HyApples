@@ -41,7 +41,7 @@ public class SetupConfig {
         config.set("messages.invalid-command", "%prefix% &cInvalid command, use /apples give (AppleID) (Amount) (Player), /apples gui or /apples reload");
         config.set("messages.apple-not-found", "%prefix% &cApple wasn't found, check config apple's ID.");
         config.set("messages.no-perms", "%prefix% &cYou don't have permission to use this apple.");
-        config.set("messages.no-command-perms", "%prefix% &fYou don't have permission to execute this command.");
+        config.set("messages.no-command-perms", "%prefix% &cYou don't have permission to execute this command.");
         config.set("messages.anvil-block", "%prefix% &cYou cannot use apples on anvils.");
         config.set("messages.player-not-found", "%prefix% &cPlayer %player_apples% wasn't found.");
         config.set("messages.player-not-online", "%prefix% &cPlayer %player_apples% isn't online.");
