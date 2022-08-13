@@ -1,0 +1,9 @@
+name: HyApples
+version: '${project.version}'
+main: com.hyplugins.Apples.Apples
+authors: [ ElAchido ]
+api-version: 1.13
+softdepend: [PlaceholderAPI]
+commands:
+  apples:
+    description: Main apples commands.
