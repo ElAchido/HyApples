@@ -5,30 +5,30 @@ import com.hyplugins.Apples.Utils.CheckColor;
 import com.hyplugins.Apples.Utils.Colors;
 import com.hyplugins.Apples.Utils.XMaterial;
 import org.bukkit.FireworkEffect;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.io.IOException;
 import java.util.*;
 
 public class Configuration {
 
-    private final Apples plugin;
+    private final Apples apples;
     public Boolean isProtectionAnvilEnabled;
     public Boolean isFireworkDamageAllowed;
 
     public Configuration(Apples plugin) {
-        this.plugin = plugin;
-        isProtectionAnvilEnabled = plugin.config.getBoolean("config.protection-anvils");
-        isFireworkDamageAllowed = plugin.config.getBoolean("config.damage-explosion-fireworks");
+        this.apples = plugin;
+        isProtectionAnvilEnabled = apples.getConfig().getBoolean("config.protection-anvils");
+        isFireworkDamageAllowed = apples.getConfig().getBoolean("config.damage-explosion-fireworks");
         setUpConfig();
     }
 
     public void setUpConfig() {
-        YamlConfiguration config = plugin.config;
+        FileConfiguration config = apples.getConfig();
         Set<String> apples = config.getConfigurationSection("apples").getKeys(false);
         for (String apple : apples) {
             String name = Colors.colorMessageNormal(config.getString("apples." + apple + ".name"));
@@ -81,16 +81,12 @@ public class Configuration {
     }
 
     public void saveConfigChanges(String path, Object value) {
-        plugin.config.set(path, value);
-        try {
-            plugin.config.save(plugin.configFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        apples.getConfig().set(path, value);
+        apples.saveConfig();
     }
 
     public void reloadConfig() {
-        plugin.config = YamlConfiguration.loadConfiguration(plugin.configFile);
+        apples.reloadConfig();
         ListApples.apples.clear();
         setUpConfig();
     }

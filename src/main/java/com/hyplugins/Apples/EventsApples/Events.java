@@ -33,7 +33,7 @@ public class Events implements Listener {
                 Player player = e.getPlayer();
                 if (apple.getUsePerm()) {
                     if (!player.hasPermission("hyplugins.apples." + apple.getId()) || !player.isOp()) {
-                        player.sendMessage(Colors.colorMessageNormal(apples.config.getString("messages.no-perms").replace("%prefix%", apples.config.getString("messages.prefix"))));
+                        player.sendMessage(Colors.colorMessageNormal(apples.getConfig().getString("messages.no-perms").replace("%prefix%", apples.getConfig().getString("messages.prefix"))));
                         e.setCancelled(true);
                         return;
                     }

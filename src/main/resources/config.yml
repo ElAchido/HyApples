@@ -1,0 +1,91 @@
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# -                                                            -
+# -      AA      PPPPPP   PPPPPP   L        EEEEEE    SSSSSS   -
+# -     A  A     P     P  P     P  L        E        SS        -
+# -    AAAAAA    PPPPPP   PPPPPP   L        EEEEEE    SSSSSS   -
+# -   A      A   P        P        L        E              SS  -
+# -  A        A  P        P        LLLLLLL  EEEEEE    SSSSSS   -
+# -                                                            -
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# -
+# Welcome to the apple's plugin config. Here you can customize all
+# the settings for those, you can add the amount of apples you want,
+# you just need to copy the format of an apple and paste it bellow.
+# -
+# APPLE's CONFIG
+# -
+# protection-anvils: true // If players modify apple's aspects (For example, the name), plugin will not recognize them,
+# making that those apples will not give the mechanics. To avoid this, enable this option.
+# -
+# damage-explosion-fireworks // This will disable apple's fireworks damage if this value is set to true.
+# -
+# You can view our documentation in the spigot page plugin.
+# If you need support, join our discord server: https://discord.gg/e55JEUkjUq
+
+config:
+  protection-anvils: true
+  damage-explosion-fireworks: true
+messages:
+  prefix: '&6&lAPPLES &8»'
+  reload-config: '%prefix% &aConfig reloaded.'
+  invalid-command: '%prefix% &cInvalid command, use /apples give (AppleID) (Amount)
+    (Player), /apples gui or /apples reload'
+  apple-not-found: '%prefix% &cApple wasn''t found, check config apple''s ID.'
+  no-perms: '%prefix% &cYou don''t have permission to use this apple.'
+  no-command-perms: '%prefix% &fYou don''t have permission to execute this command.'
+  anvil-block: '%prefix% &cYou cannot use apples on anvils.'
+  player-not-found: '%prefix% &cPlayer %player_apples% wasn''t found.'
+  player-not-online: '%prefix% &cPlayer %player_apples% isn''t online.'
+  give-apple: '%prefix% &aApple was given to player %player_apples%.'
+  receive-apple: '%prefix% &aYou''ve received x%amount% %apple%.'
+  invalid-number: '%prefix% &cThe amount isn''t valid.'
+apples:
+  AppleNumber1:
+    name: '&fApple &e#1'
+    material: GOLDEN_APPLE
+    data: 1
+    thunder: false
+    use_perm: true
+    lore:
+      - '&fThis is a &cpowerfull'
+      - '&6apple&f, be careful!'
+    default_apple_effects: false
+    broadcast:
+      - ''
+      - '&fPlayer &6%player_apples% &fhas &aused &fan apple!'
+      - '&4¡He is in this world!'
+      - ''
+    only_origin_world_broadcast: true
+    effects:
+      - INCREASE_DAMAGE:1:15
+      - FIRE_RESISTANCE:1:15
+    fireworks:
+      - CREEPER:WHITE
+      - BALL_LARGE:NAVY
+    commands:
+      - eco give %player_apples% 1000
+      - say hello %player_apples%!
+  AppleNumber2:
+    name: '&fApple &e#2'
+    material: GOLDEN_APPLE
+    data: 1
+    thunder: true
+    use_perm: false
+    lore:
+      - '&fThis is a &cpowerfull'
+      - '&6apple&f, be careful!'
+    default_apple_effects: false
+    broadcast:
+      - ''
+      - '&fPlayer &6%luckperms_prefix% %player_apples% &fhas &aused &fan apple!'
+      - ''
+    only_origin_world_broadcast: true
+    effects:
+      - INCREASE_DAMAGE:1:30
+      - FIRE_RESISTANCE:1:30
+    fireworks:
+      - CREEPER:RED
+      - BALL_LARGE:GREEN
+    commands:
+      - give %player_apples% diamond 1
+      - say hello %player_apples%!

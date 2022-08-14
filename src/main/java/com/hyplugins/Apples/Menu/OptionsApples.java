@@ -1,5 +1,6 @@
 package com.hyplugins.Apples.Menu;
 
+import com.hyplugins.Apples.Utils.ItemNames;
 import com.hyplugins.Apples.Utils.XMaterial;
 import com.hyplugins.Apples.Config.AppleConstructor;
 import com.hyplugins.Apples.Utils.Colors;
@@ -17,7 +18,11 @@ public class OptionsApples {
     public void getAppleSettings(Player player, AppleConstructor apple) {
         Inventory gui = Bukkit.createInventory(player, 45, Colors.colorMessageNormal("&6&lAPPLE &8| Editing..."));
 
-        gui.setItem(4, apple.getMadeApple().clone());
+        ItemStack appleDisplay = apple.getMadeApple().clone();
+        ItemMeta metaAppleDisplay = appleDisplay.getItemMeta();
+        metaAppleDisplay.setDisplayName(apple.getId());
+        appleDisplay.setItemMeta(metaAppleDisplay);
+        gui.setItem(4, appleDisplay);
 
         ItemStack perm = new ItemStack(XMaterial.NAME_TAG.parseMaterial());
         ItemMeta metaPerm = perm.getItemMeta();

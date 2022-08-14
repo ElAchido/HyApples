@@ -1,8 +1,8 @@
 package com.hyplugins.Apples.Menu;
 
 import com.hyplugins.Apples.Utils.Colors;
+import com.hyplugins.Apples.Utils.ItemNames;
 import com.hyplugins.Apples.Utils.XMaterial;
-import com.hyplugins.Apples.Config.AppleConstructor;
 import com.hyplugins.Apples.Config.ListApples;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -22,7 +22,7 @@ public class ApplesShow {
         int apple = amount - 27;
         for (int slot : new int[]{9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35}) {
             if (ListApples.apples.size() - 1 < apple) break;
-            gui.setItem(slot, setItemNames(ListApples.apples.get(apple)));
+            gui.setItem(slot, ItemNames.setItemNames(ListApples.apples.get(apple)));
             apple++;
         }
 
@@ -47,21 +47,5 @@ public class ApplesShow {
         for (int slot : new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 36 ,37 ,38, 39, 41, 42 ,44}) { gui.setItem(slot, frame); }
 
         player.openInventory(gui);
-    }
-
-    public ItemStack setItemNames(AppleConstructor apple) {
-        ItemStack item = apple.getMadeApple().clone();
-        ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(apple.getId());
-        meta.setLore(new ArrayList<>(Arrays.asList(
-                "",
-                Colors.colorMessageNormal("&8✶ &fUse &c&lPERMISSION&7: &f" + apple.getUsePerm()),
-                Colors.colorMessageNormal("&8✶ &fSpawn &9&lTHUNDER&7: &f" + apple.getThunder()),
-                Colors.colorMessageNormal("&8✶ &fDefault &6Apple &d&lEFFECTS&7: &f" + apple.getDefaultAppleEffects()),
-                Colors.colorMessageNormal("&8✶ &fOrigin world &e&lBROADCAST&7: &f" + apple.getIsBroadcastSameWorld()),
-                ""
-        )));
-        item.setItemMeta(meta);
-        return item;
     }
 }

@@ -27,7 +27,7 @@ public class AnvilEvent implements Listener {
                 if (apple.getMadeApple().equals(item)) {
                     e.setCancelled(true);
                     e.getWhoClicked().getOpenInventory().close();
-                    e.getWhoClicked().sendMessage(Colors.colorMessageNormal(apples.config.getString("messages.anvil-block").replace("%prefix%", apples.config.getString("messages.prefix"))));
+                    e.getWhoClicked().sendMessage(Colors.colorMessageNormal(apples.getConfig().getString("messages.anvil-block").replace("%prefix%", apples.getConfig().getString("messages.prefix"))));
                     return;
                 }
             }
