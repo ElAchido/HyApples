@@ -6,12 +6,12 @@ import com.hyplugins.Apples.Utils.Colors;
 import com.hyplugins.Apples.Utils.XMaterial;
 import org.bukkit.FireworkEffect;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.io.File;
 import java.util.*;
 
 public class Configuration {
@@ -86,6 +86,10 @@ public class Configuration {
     }
 
     public void reloadConfig() {
+        File file = new File(apples.getDataFolder(), "config.yml");
+        if (!file.exists()) {
+            apples.saveResource("config.yml", false);
+        }
         apples.reloadConfig();
         ListApples.apples.clear();
         setUpConfig();

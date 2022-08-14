@@ -48,7 +48,7 @@ public class Events implements Listener {
                     World world = player.getWorld();
                     world.strikeLightningEffect(player.getLocation());
                 }
-                sendBroadcastMessage(apple.getIsBroadcastSameWorld(), player.getWorld(), apple.getBroadcast(), player);
+                sendBroadcastMessage(apple.getIsBroadcastSameWorld(), player.getWorld().getName(), apple.getBroadcast(), player);
                 for (PotionEffect effect : apple.getEffects()) {
                     if (player.hasPotionEffect(effect.getType())) player.removePotionEffect(effect.getType());
                     player.addPotionEffect(effect);
@@ -62,9 +62,9 @@ public class Events implements Listener {
         }
     }
 
-    public void sendBroadcastMessage(Boolean inSameWorld, World world, List<String> broadcast, Player origin) {
+    public void sendBroadcastMessage(Boolean inSameWorld, String world, List<String> broadcast, Player origin) {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (inSameWorld) { if (!player.getWorld().equals(world)) break; }
+            if (inSameWorld) { if (!player.getWorld().getName().equals(world)) break; }
             for (String line : broadcast) {
                 if (apples.isPlaceholderAPI) {
                     line = Colors.applyPlaceholderAPI(line, origin);
