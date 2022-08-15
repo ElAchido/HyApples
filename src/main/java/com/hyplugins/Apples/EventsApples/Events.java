@@ -64,7 +64,7 @@ public class Events implements Listener {
 
     public void sendBroadcastMessage(Boolean inSameWorld, String world, List<String> broadcast, Player origin) {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (inSameWorld) { if (!player.getWorld().getName().equals(world)) break; }
+            if (inSameWorld) { if (!player.getWorld().getName().equals(world)) continue; }
             for (String line : broadcast) {
                 if (apples.isPlaceholderAPI) {
                     line = Colors.applyPlaceholderAPI(line, origin);

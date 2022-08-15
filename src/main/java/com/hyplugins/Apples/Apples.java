@@ -14,8 +14,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
-
 public final class Apples extends JavaPlugin {
 
     public Boolean isPlaceholderAPI;
