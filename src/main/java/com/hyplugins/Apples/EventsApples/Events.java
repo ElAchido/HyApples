@@ -28,8 +28,8 @@ public class Events implements Listener {
     public void onConsume(PlayerItemConsumeEvent e) {
         for (AppleConstructor apple : ListApples.apples) {
             ItemStack item = e.getItem().clone();
-            item.setAmount(1);
-            if (item.equals(apple.getMadeApple())) {
+            ItemStack appleMade = apple.getMadeApple().clone();
+            if (item.getType().equals(appleMade.getType()) && item.getItemMeta().getDisplayName().equals(appleMade.getItemMeta().getDisplayName()) && item.getItemMeta().getLore().equals(appleMade.getItemMeta().getLore())) {
                 Player player = e.getPlayer();
                 if (apple.getUsePerm()) {
                     if (!player.hasPermission("hyplugins.apples." + apple.getId()) || !player.isOp()) {
@@ -40,6 +40,7 @@ public class Events implements Listener {
                 }
                 if (!apple.getDefaultAppleEffects()) {
                     e.setCancelled(true);
+                    item.setAmount(1);
                     int newAmount = e.getItem().getAmount() - 1;
                     item.setAmount(newAmount);
                     player.getInventory().setItemInHand(item);
