@@ -32,7 +32,7 @@ public class Events implements Listener {
             if (item.getType().equals(appleMade.getType()) && item.getItemMeta().getDisplayName().equals(appleMade.getItemMeta().getDisplayName()) && item.getItemMeta().getLore().equals(appleMade.getItemMeta().getLore())) {
                 Player player = e.getPlayer();
                 if (apple.getUsePerm()) {
-                    if (!player.hasPermission("hyplugins.apples." + apple.getId()) || !player.isOp()) {
+                    if (!player.hasPermission("hyplugins.apples." + apple.getId()) && !player.isOp()) {
                         player.sendMessage(Colors.colorMessageNormal(apples.getConfig().getString("messages.no-perms").replace("%prefix%", apples.getConfig().getString("messages.prefix"))));
                         e.setCancelled(true);
                         return;
