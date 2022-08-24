@@ -5,6 +5,7 @@ import com.hyplugins.Apples.Runnables.Fireworks;
 import com.hyplugins.Apples.Utils.Colors;
 import com.hyplugins.Apples.Config.AppleConstructor;
 import com.hyplugins.Apples.Config.ListApples;
+import com.hyplugins.Apples.Utils.XMaterial;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -40,10 +41,18 @@ public class Events implements Listener {
                 }
                 if (!apple.getDefaultAppleEffects()) {
                     e.setCancelled(true);
-                    item.setAmount(1);
-                    int newAmount = e.getItem().getAmount() - 1;
-                    item.setAmount(newAmount);
-                    player.getInventory().setItemInHand(item);
+                    if (XMaterial.isNewVersion()) {
+                        if (player.getInventory().getItemInOffHand().equals(item)) {
+                            item.setAmount(player.getInventory().getItemInOffHand().getAmount() - 1);
+                            player.getInventory().setItemInOffHand(item);
+                        } else {
+                            item.setAmount(1);
+                            player.getInventory().removeItem(item);
+                        }
+                    } else {
+                        item.setAmount(1);
+                        player.getInventory().removeItem(item);
+                    }
                 }
                 if (apple.getThunder()) {
                     World world = player.getWorld();
