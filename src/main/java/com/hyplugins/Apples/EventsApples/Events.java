@@ -30,44 +30,48 @@ public class Events implements Listener {
         for (AppleConstructor apple : ListApples.apples) {
             ItemStack item = e.getItem().clone();
             ItemStack appleMade = apple.getMadeApple().clone();
-            if (item.getType().equals(appleMade.getType()) && item.getItemMeta().getDisplayName().equals(appleMade.getItemMeta().getDisplayName()) && item.getItemMeta().getLore().equals(appleMade.getItemMeta().getLore())) {
-                Player player = e.getPlayer();
-                if (apple.getUsePerm()) {
-                    if (!player.hasPermission("hyplugins.apples." + apple.getId()) && !player.isOp()) {
-                        player.sendMessage(Colors.colorMessageNormal(apples.getConfig().getString("messages.no-perms").replace("%prefix%", apples.getConfig().getString("messages.prefix"))));
-                        e.setCancelled(true);
-                        return;
-                    }
-                }
-                if (!apple.getDefaultAppleEffects()) {
-                    e.setCancelled(true);
-                    if (XMaterial.isNewVersion()) {
-                        if (player.getInventory().getItemInOffHand().equals(item)) {
-                            item.setAmount(player.getInventory().getItemInOffHand().getAmount() - 1);
-                            player.getInventory().setItemInOffHand(item);
-                        } else {
-                            item.setAmount(1);
-                            player.getInventory().removeItem(item);
+            if (item.getItemMeta() != null) {
+                if (item.getItemMeta().hasDisplayName() && item.getItemMeta().hasLore()) {
+                    if (item.getType().equals(appleMade.getType()) && item.getItemMeta().getDisplayName().equals(appleMade.getItemMeta().getDisplayName()) && item.getItemMeta().getLore().equals(appleMade.getItemMeta().getLore())) {
+                        Player player = e.getPlayer();
+                        if (apple.getUsePerm()) {
+                            if (!player.hasPermission("hyplugins.apples." + apple.getId()) && !player.isOp()) {
+                                player.sendMessage(Colors.colorMessageNormal(apples.getConfig().getString("messages.no-perms").replace("%prefix%", apples.getConfig().getString("messages.prefix"))));
+                                e.setCancelled(true);
+                                break;
+                            }
                         }
-                    } else {
-                        item.setAmount(1);
-                        player.getInventory().removeItem(item);
+                        if (!apple.getDefaultAppleEffects()) {
+                            e.setCancelled(true);
+                            if (XMaterial.isNewVersion()) {
+                                if (player.getInventory().getItemInOffHand().equals(item)) {
+                                    item.setAmount(player.getInventory().getItemInOffHand().getAmount() - 1);
+                                    player.getInventory().setItemInOffHand(item);
+                                } else {
+                                    item.setAmount(1);
+                                    player.getInventory().removeItem(item);
+                                }
+                            } else {
+                                item.setAmount(1);
+                                player.getInventory().removeItem(item);
+                            }
+                        }
+                        if (apple.getThunder()) {
+                            World world = player.getWorld();
+                            world.strikeLightningEffect(player.getLocation());
+                        }
+                        sendBroadcastMessage(apple.getIsBroadcastSameWorld(), player.getWorld().getName(), apple.getBroadcast(), player);
+                        for (PotionEffect effect : apple.getEffects()) {
+                            if (player.hasPotionEffect(effect.getType())) player.removePotionEffect(effect.getType());
+                            player.addPotionEffect(effect);
+                        }
+                        new Fireworks(apple.getFireworks(), player, apples);
+                        for (String command : apple.getCommands()) {
+                            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player_apples%", player.getName()));
+                        }
+                        break;
                     }
                 }
-                if (apple.getThunder()) {
-                    World world = player.getWorld();
-                    world.strikeLightningEffect(player.getLocation());
-                }
-                sendBroadcastMessage(apple.getIsBroadcastSameWorld(), player.getWorld().getName(), apple.getBroadcast(), player);
-                for (PotionEffect effect : apple.getEffects()) {
-                    if (player.hasPotionEffect(effect.getType())) player.removePotionEffect(effect.getType());
-                    player.addPotionEffect(effect);
-                }
-                new Fireworks(apple.getFireworks(), player, apples);
-                for (String command : apple.getCommands()) {
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player_apples%", player.getName()));
-                }
-                break;
             }
         }
     }
